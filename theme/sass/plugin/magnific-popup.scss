@@ -1,0 +1,328 @@
+
+/* Config Batch
+-------------------------------------------------- */
+@import '../config/config';
+
+/*! Magnific Popup
+-------------------------------------------------- */
+
+
+/* Background animate */
+
+/* overlay at start */
+.panel-quick-view.mfp-bg {
+  @include opacity(0)
+}
+/* overlay animate in */
+.panel-quick-view.mfp-bg.mfp-ready {
+  @include opacity(1)
+}
+/* overlay animate out */
+.panel-quick-view.mfp-bg.mfp-removing {
+  @include opacity(0)
+}
+
+/* content at start */
+.panel-quick-view.mfp-wrap .panel-bottom,
+.panel-quick-view.mfp-wrap .mfp-content {
+  right: -$panel-size;
+}
+/* content animate it */
+.panel-quick-view.mfp-wrap.mfp-ready .panel-bottom,
+.panel-quick-view.mfp-wrap.mfp-ready .mfp-content {
+  right: 0;
+}
+/* content animate out */
+.panel-quick-view.mfp-wrap.mfp-removing .panel-bottom,
+.panel-quick-view.mfp-wrap.mfp-removing .mfp-content {
+  right: -$panel-size;
+}
+
+
+
+.panel-quick-view.mfp-bg {
+
+  background-color: transparent;
+
+  background: -moz-linear-gradient(-45deg,  rgba(102,102,255,0) 0%, rgba(102,102,255,1) 100%);
+  background: -webkit-linear-gradient(-45deg,  rgba(102,102,255,0) 0%,rgba(102,102,255,1) 100%);
+  background: linear-gradient(135deg,  rgba(102,102,255,0) 0%,rgba(102,102,255,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006666ff', endColorstr='#6666ff',GradientType=1 );
+
+}
+
+.global-ajax-view .mfp-content {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+.panel-quick-view .mfp-content {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  background: white;
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  max-width: $panel-size;
+
+  height: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  -webkit-overflow-scrolling: touch;
+
+  @include box-shadow();
+}
+
+.mfp-preloader {
+
+  color: inherit;
+
+  margin: 0;
+  padding: $door-padding $door-size;
+
+  color: $color-info;
+  background-color: $color-tree;
+
+  //@include box-shadow();
+
+  position: absolute;
+
+  width: auto;
+  text-align: center;
+
+  top: inherit;;
+  left: inherit;
+  right: inherit;
+
+  @include centerer;
+
+  @include border-radius(100px)
+
+  //z-index: 1060;
+}
+
+.mfp-preloader a {
+  color: inherit
+}
+.mfp-preloader a:hover {
+  color: inherit;
+}
+
+/* Content loading is in progress */
+.mfp-s-loading {
+}
+
+/* Content successfully loaded */
+.mfp-s-ready {
+}
+
+/* Error during loading  */
+.mfp-s-error {
+}
+
+// Close icon
+
+/* content at start */
+.panel-quick-view.mfp-wrap .mfp-close {
+  @include opacity(0);
+  right: -$door-size*4;
+}
+/* content animate it */
+.panel-quick-view.mfp-wrap.mfp-ready .mfp-close {
+  @include opacity(1);
+  right: 0;
+}
+/* content animate it */
+.panel-quick-view.mfp-wrap.mfp-ready .mfp-back {
+  @include opacity(1);
+  right: 0;
+}
+/* content animate out */
+.panel-quick-view.mfp-wrap.mfp-removing .mfp-close {
+  @include opacity(0);
+  right: -$door-size*4;
+}
+
+
+.mfp-close,
+.mfp-back {
+
+  width: $door-size*4;
+  height: $door-size*4;
+  line-height: $door-size*4;
+
+  top: 0;
+  right: 0;
+
+  position: fixed;
+
+  &:active {
+    top: 0;
+  }
+
+  @include opacity(1);
+
+  visibility: visible;
+
+  &:before {
+
+    visibility: visible;
+
+    position: absolute;
+    z-index: 2;
+
+    top: 0;
+    right: 0;
+
+    font-size: 48px;
+    line-height: $door-size*4;
+
+    font-family: "bigwax";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: '\e806';
+
+    overflow: hidden;
+
+    //@include opacity(0.5);
+
+    color: $color-one;
+    //background-color: $color-tree;
+
+    width: 100%;
+    height: 100%;
+
+    //@include box-shadow();
+    //@include border-radius(100px);
+
+    overflow: hidden;
+  }
+
+  &:hover,
+  &:focus {
+
+    @include opacity(1);
+
+    &:before {
+
+      //@include opacity(1);
+
+      color: $color-tree;
+      background-color: $color-one;
+    }
+  }
+}
+.mfp-back {
+  &:before {
+    content: '\e802';
+  }
+}
+
+
+
+
+
+
+/* global-ajax-view
+-------------------------------------------------- */
+
+/* Background animate */
+
+/* overlay at start */
+.global-ajax-view.mfp-bg {
+  @include opacity(0)
+}
+/* overlay animate in */
+.global-ajax-view.mfp-bg.mfp-ready {
+  @include opacity(1)
+}
+/* overlay animate out */
+.global-ajax-view.mfp-bg.mfp-removing {
+  @include opacity(0)
+}
+
+/* content at start */
+.global-ajax-view.mfp-wrap .mfp-content {
+  @include opacity(0);
+  //top: -20%;
+}
+/* content animate it */
+.global-ajax-view.mfp-wrap.mfp-ready .mfp-content {
+  @include opacity(1);
+  //top: 0%;
+}
+/* content animate out */
+.global-ajax-view.mfp-wrap.mfp-removing .mfp-content {
+  @include opacity(0);
+  //top: -20%;
+}
+
+.global-ajax-view.mfp-bg {
+
+  background-color: transparent;
+
+  background: -moz-linear-gradient(top,  rgba(102,102,255,1) 0%, rgba(82,133,255,1) 20%, rgba(0,255,255,0.8) 100%);
+  background: -webkit-linear-gradient(top,  rgba(102,102,255,1) 0%,rgba(82,133,255,1) 20%,rgba(0,255,255,0.8) 100%);
+  background: linear-gradient(to bottom,  rgba(102,102,255,1) 0%,rgba(82,133,255,1) 20%,rgba(0,255,255,0.8) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6666ff', endColorstr='#b300ffff',GradientType=0 );
+
+}
+
+.global-ajax-view {
+  .mfp-close {
+    &:before {
+      color: $color-tree;
+    }
+    &:hover,
+    &:focus {
+      &:before {
+        color: $color-one;
+        background-color: $color-tree;
+      }
+    }
+  }
+}
+
+
+// Close icon
+
+/* content at start */
+.global-ajax-view.mfp-wrap .mfp-close {
+  @include opacity(0);
+}
+/* content animate it */
+.global-ajax-view.mfp-wrap.mfp-ready .mfp-close {
+  @include opacity(1);
+}
+/* content animate out */
+.global-ajax-view.mfp-wrap.mfp-removing .mfp-close {
+  @include opacity(0);
+}
+

@@ -1,0 +1,192 @@
+
+/* Config Batch
+-------------------------------------------------- */
+@import '../config/config';
+
+/*! Soundmanager (Player)
+-------------------------------------------------- */
+.sm2-bar-ui * {
+  box-shadow: none !important;
+}
+
+.sm2-bar-ui.full-width {
+  z-index: inherit;
+  border: 1px solid $color-two;
+  margin: -1px 0 $door-size - 1px;
+}
+
+.sm2-bar-ui,
+.sm2-bar-ui.fixed,
+.sm2-bar-ui.fixed .bd,
+.sm2-bar-ui.bottom .bd,
+.sm2-bar-ui .sm2-inline-element:first-of-type,
+.sm2-bar-ui .sm2-inline-element:last-of-type,
+.sm2-bar-ui .label {
+  border-radius: 0 !important;
+}
+
+.sm2-bar-ui {
+  min-width: inherit;
+}
+
+.sm2-bar-ui .bd .sm2-button-element,
+.sm2-bar-ui .bd .sm2-button-element{
+  background: none;
+  @include opacity(1);
+}
+
+.sm2-bar-ui .bd .sm2-button-element:hover,
+.sm2-bar-ui .bd .sm2-button-element:active {
+  background: none;
+  @include opacity(1);
+
+  background-color: $color-two;
+}
+
+.sm2-bar-ui .bd .sm2-button-element:active {
+  background: none;
+  @include opacity(1);
+}
+
+.sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:hover,
+.sm2-bar-ui .bd .sm2-extra-controls .sm2-button-element:active,
+.sm2-bar-ui .bd .active {
+  background-color: transparent;
+}
+
+.sm2-bar-ui .sm2-main-controls,
+.sm2-bar-ui .sm2-playlist-drawer {
+  background-color: $color-tree;
+}
+
+.sm2-bar-ui .sm2-playlist {
+  display: none;
+  visibility: hidden;
+}
+
+.sm2-bar-ui .sm2-inline-texture {
+  background: transparent;
+}
+
+.sm2-bar-ui .sm2-inline-element {
+  vertical-align: middle;
+  border: none;
+}
+
+.sm2-progress .sm2-progress-ball {
+
+  //background-color: $color-tree;
+  background-color: transparent;
+
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+
+  width:  1px;
+  height: $door-size*2;
+
+  -webkit-transform: scale(1);
+  transform: scale(1);
+
+  margin-top: 0;
+  margin-left: -1px;
+
+  cursor: inherit !important;
+}
+
+.sm2-bar-ui.grabbing .sm2-progress .sm2-progress-ball {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.sm2-progress-bd {
+  //padding: 0 $door-size / 2;
+  padding: 0;
+}
+
+.sm2-progress-ball .icon-overlay {
+  visibility: hidden;
+}
+
+.sm2-bar-ui .sm2-inline-status {
+  padding: 0;
+  margin: 0;
+}
+
+.sm2-bar-ui .sm2-inline-element,
+.sm2-bar-ui .sm2-button-element .sm2-button-bd {
+  min-height: $door-padding*4;
+  min-width: $door-padding*4;
+}
+
+.sm2-progress .sm2-progress-track {
+  background-color: $color-tree;
+  @include border-radius(0);
+  height: $door-padding*4;
+
+  border-left: 1px solid $color-two;
+  border-right: 1px solid $color-two;
+}
+
+.sm2-progress .sm2-progress-bar {
+  //background-color: lighten($color-one, 20%);
+
+  @include opacity(1);
+  background-color: $color-two;
+
+  @include border-radius(0);
+  height: $door-padding*4;
+}
+
+.sm2-progress:hover .sm2-progress-bar {
+  background-color: $color-one;
+}
+
+.sm2-bar-ui,
+.sm2-inline-time,
+.sm2-inline-duration {
+  font-size: $door-size - ($door-size / 4);
+  line-height: $door-size;
+}
+
+.sm2-bar-ui .sm2-playlist-wrapper {
+  background-color: transparent;
+  border-top: $doorframe-size solid $color-two;
+  padding: 0;
+}
+
+.sm2-element ul {
+  font-size: $door-size - ($door-size / 4);
+  line-height: $door-size;
+
+  padding: $door-padding - $doorframe-size 0 $door-padding;
+}
+
+.sm2-playlist-wrapper ul li a {
+  font-size: 100%;
+  padding: $door-padding / 2 $door-padding;
+  color: $color-default !important;
+}
+
+.sm2-playlist-wrapper ul li {
+  border-bottom: none;
+}
+
+.sm2-playlist-wrapper ul li a:hover,
+.sm2-bar-ui.dark-text ul li.selected a {
+  background-color: transparent !important;
+  color: $color-one !important;
+  background: none;
+}
+
+.sm2-playlist-wrapper ul li:nth-child(odd) {
+  background-color: transparent;
+}
+
+
+.sm2-playlist-wrapper ul {
+  max-height: inherit;
+}
+
+ul.sm2-playlist-bd {
+  padding: $door-padding / 2 0;
+}

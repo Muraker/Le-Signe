@@ -1,0 +1,26 @@
+/* Imports
+-------------------------------------------------- */
+@import 'config-door-size';
+@import 'config-mixins';
+
+/* Global
+-------------------------------------------------- */
+code, kbd, samp, pre, tt, var, mark, abbr {
+  //@include border-radius(2px)
+}
+
+/* Buttons
+-------------------------------------------------- */
+button, .button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+.inputfile + label {
+  //@include border-radius(2px);
+}
+
+/* Input
+-------------------------------------------------- */
+input, textarea, select {
+  //@include border-radius(2px);
+}

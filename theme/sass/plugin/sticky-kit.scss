@@ -1,0 +1,98 @@
+
+/* Config Batch
+-------------------------------------------------- */
+@import '../config/config';
+
+/*! Sticky-kit
+-------------------------------------------------- */
+
+.sticky_container {
+
+  /* Hack for space between div*/
+  font-size: 0;
+  text-align: center;
+}
+
+.sticky_column {
+
+  /* Hack for space between div*/
+  font-size: $door-size - ($door-size / 4);
+
+  text-align: left;
+
+  vertical-align: top;
+  display: inline-block;
+}
+
+.sticky_column-left {
+  width: 30%;
+}
+.sticky_column-center {
+  width: 40%;
+  padding: 0 $door-size;
+}
+.sticky_column-right {
+  width: 30%;
+}
+
+@media (max-width: 1000px) {
+  .sticky_column-left {
+    width: 100%;
+  }
+  .sticky_column-center {
+    width: 55%;
+    padding: 0 $door-size 0 0;
+  }
+  .sticky_column-right {
+    width: 45%;
+  }
+
+  .bw-gallery figure {
+    max-width: 100px;
+  }
+
+  .bw-gallery figure {
+    margin: 0 $door-size/4 $door-size !important;
+  }
+
+  .bw-gallery figure:first-child {
+    display: block;
+    max-width: 400px;
+    margin: 0 auto $door-size !important;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .sticky_column-center {
+    width: 100%;
+    padding: 0;
+  }
+  .sticky_column-right {
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+.sticky_column-test {
+  width: 100%;
+  background-color: $color-two;
+
+  background: repeating-linear-gradient(
+    45deg,
+    $color-two,
+    $color-two 10px,
+    rgba(0, 0, 0, 0.2) 10px,
+    rgba(0, 0, 0, 0.2) 20px
+  )
+
+}

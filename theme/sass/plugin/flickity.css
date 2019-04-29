@@ -1,0 +1,153 @@
+/* Config Batch
+-------------------------------------------------- */
+/* Door Size */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+/* DOOR SIZE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Color */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+/* UI Colors */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+.color-default {
+  color: white; }
+
+.color-one {
+  color: black; }
+
+.color-two {
+  color: blue; }
+
+.color-tree {
+  color: #FF0000; }
+
+/* System Colors */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+.color-info {
+  color: #6666FF; }
+
+.color-warning {
+  color: #fcc419; }
+
+.color-error {
+  color: #ff4758; }
+
+.color-valid {
+  color: #40c057; }
+
+.color-required {
+  color: #fff3bf; }
+
+.color-mark {
+  color: #b2f2bb; }
+
+.color-abbr {
+  color: #fff3bf; }
+
+/* Mixins */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Config Mixin's
+-------------------------------------------------- */
+/* Box Shadow
+-------------------------------------------------- */
+/* @include box-shadow();
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Drop Shadow
+-------------------------------------------------- */
+/* @include drop-shadow();
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Filter Blur
+-------------------------------------------------- */
+/* @include filter-blur();
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Centering
+-------------------------------------------------- */
+/*
+
+.parent {
+  position: relative;
+}
+.child {
+  @include centerer;
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Border Radius
+-------------------------------------------------- */
+/* @include border-radius(5px)
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Opacity
+-------------------------------------------------- */
+/* @include opacity(0.8)
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Clearfix
+-------------------------------------------------- */
+/* @include clearfix()
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Responsive Breakpoints
+-------------------------------------------------- */
+/*
+@include breakpoint(large) { width: 60%; }
+@include breakpoint(medium) { width: 80%; }
+@include breakpoint(small) { width: 95%; }
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/* Retina Images
+-------------------------------------------------- */
+/* Usage:
+
+div.logo {
+  background: url("logo.png") no-repeat;
+  @include image-2x("logo2x.png", 100px, 25px);
+}
+
+Output:
+
+div.logo {
+  background: url("logo.png") no-repeat;
+}
+@media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
+  div.logo {
+    background-image: url("logo2x.png");
+    background-size: 100px 25px;
+  }
+}
+- - - - - - - - - - - - - - - - - - - - - - - - - - */
+/*! Flickity
+-------------------------------------------------- */
+.carousel {
+  height: calc(100vh - 160px);
+  max-height: 500px; }
+  .carousel * {
+    transition: left 0.2s ease-in-out; }
+
+.carousel .flickity-viewport {
+  position: absolute;
+  width: 100%; }
+
+.carousel-cell-image {
+  display: block;
+  height: 100%;
+  max-width: inherit;
+  margin: 0;
+  padding: 1.6125vw 3.225vw 1.6125vw 0;
+  filter: contrast(103%) brightness(97%) drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.1)); }
+
+.carousel.is-fullscreen {
+  background-color: #FF0000; }
+
+.carousel.is-fullscreen .carousel-cell-image {
+  height: 100%; }
+
+/* fade in lazy loaded image */
+.carousel-cell-image.flickity-lazyloaded,
+.carousel-cell-image.flickity-lazyerror {
+  opacity: 1; }
+
+.carousel-button {
+  float: right;
+  padding: 4.03125vw 3.225vw 3.225vw 3.225vw;
+  text-align: right; }
+  .carousel-button button {
+    width: 3.225vw;
+    height: 3.225vw;
+    line-height: 3.225vw;
+    padding: 0; }

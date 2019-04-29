@@ -1,0 +1,348 @@
+/* Imports
+-------------------------------------------------- */
+@import 'config-color';
+
+/* HTML Color
+-------------------------------------------------- */
+html {
+  color: $color-default;
+  //background-color: $color-tree;
+}
+
+/* Links Color
+-------------------------------------------------- */
+:link, :visited {
+  color: $color-one;
+}
+
+a:hover, a:focus {
+  color: $color-tree;
+}
+
+/* Required Color
+-------------------------------------------------- */
+:required,
+.required {
+  background-color: $color-required;
+}
+
+/* Blockquote Color
+-------------------------------------------------- */
+blockquote {
+  color: $color-default;
+  background-color: $color-two;
+}
+
+/* HR Color
+-------------------------------------------------- */
+hr {
+  background-color: $color-two;
+}
+
+/* Button Color
+-------------------------------------------------- */
+button, .button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+.inputfile + label {
+  color: $color-one;
+  background-color: $color-two;
+}
+
+button:hover, .button:hover,
+button:focus, .button:focus,
+input[type="submit"]:hover, input[type="submit"]:focus,
+input[type="reset"]:hover, input[type="reset"]:focus,
+input[type="button"]:hover, input[type="button"]:focus,
+.inputfile:focus + label, .inputfile + label:hover{
+  color: $color-tree;
+  background-color: $color-one;
+}
+
+.button-light,
+.button-light:hover,
+.button-light:focus {
+  color: $color-one !important;
+  background-color: transparent !important;
+}
+
+.button-light:hover,
+.button-light:focus {
+  background-color: $color-two !important;
+}
+
+.button-hard,
+.button-hard:hover,
+.button-hard:focus {
+  color: $color-tree !important;
+  background-color: $color-one !important;
+}
+
+.button-hard:hover,
+.button-hard:focus {
+  background-color: $color-default !important;
+}
+
+/* Input, Textarea and Select Color
+-------------------------------------------------- */
+input,
+textarea,
+select {
+  color: $color-default;
+  background-color: $color-two;
+  border-color: $color-two !important; // !important to reset all browser border color
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  color: $color-default;
+  background-color: $color-tree;
+  border-color: $color-two !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  color: $color-default;
+  background-color: $color-tree;
+  border-color: $color-two !important;
+}
+
+select,
+option {
+  color: $color-one;
+}
+
+select:checked,
+optgroup,
+optgroup:disabled option,
+option:checked {
+  color: $color-default;
+}
+
+/* Input Placeholder Color
+-------------------------------------------------- */
+::placeholder {
+  opacity: 0.5;
+}
+
+:hover::placeholder {
+  opacity: 0.2;
+}
+
+:focus::placeholder {
+  opacity: 0;
+  color: transparent !important
+}
+
+
+/* Input Radio & Checkbox Color
+-------------------------------------------------- */
+input[type="radio"] + label::before,
+input[type="checkbox"] + label::before,
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  color: $color-one;
+}
+
+input[type="radio"] + label:hover::before,
+input[type="checkbox"] + label:hover::before,
+input[type="radio"] + label:hover,
+input[type="checkbox"] + label:hover {
+  color: $color-default;
+}
+
+input[type="radio"] + label:hover::after,
+input[type="checkbox"] + label:hover::after {
+  border-color: $color-default;
+}
+
+input[type="radio"] + label::after,
+input[type="checkbox"] + label::after {
+  border-color: $color-one;
+}
+
+input[type="radio"]:checked + label::before,
+input[type="checkbox"]:checked + label::before,
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label {
+  color: $color-default;
+}
+
+input[type="radio"]:checked + label:hover::before,
+input[type="checkbox"]:checked + label:hover::before,
+input[type="radio"]:checked + label:hover,
+input[type="checkbox"]:checked + label:hover {
+  color: $color-default;
+}
+
+input[type="radio"]:checked + label::after,
+input[type="checkbox"]:checked + label::after {
+  border-color: $color-default;
+  background-color: $color-default;
+}
+
+/* Input Range Color
+-------------------------------------------------- */
+input[type=range]::-webkit-slider-runnable-track {
+  background: $color-default
+}
+
+input[type=range]::-moz-range-track {
+  background: $color-default
+}
+
+input[type=range]::-webkit-slider-thumb {
+  background: $color-one
+}
+
+input[type=range]::-moz-range-thumb {
+  background: $color-one
+}
+
+/* Fieldset Color
+-------------------------------------------------- */
+fieldset {
+  outline-color: $color-two !important;
+}
+
+/* Table Color
+-------------------------------------------------- */
+table {
+  background-color: $color-tree;
+  outline-color: $color-default;
+}
+
+th, td {
+  border-color: $color-default;
+}
+
+/* Code, Pre, Mark, etc. Color
+-------------------------------------------------- */
+code, kbd, samp, pre, tt, var {
+  background-color: $color-two;
+}
+
+mark {
+  background-color: $color-mark;
+}
+
+abbr {
+  background-color: $color-abbr;
+}
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+/* Demo Layout Color (to be removed)
+-------------------------------------------------- */
+
+[class*='grid'].fd-demo {
+  outline: 2px solid rgba(0, 0, 255, 0.2);
+  outline-offset: -1px;
+  background-color: $color-tree;
+}
+
+.fd-demo > [class*='col-'] {
+  color: $color-default;
+  outline: 1px solid rgba(255, 0, 0, 0.2);
+  outline-offset: 0px;
+  background-color: $color-tree;
+}
+
+.fd-demo svg,
+.fd-demo img {
+  color: $color-one;
+  background-color: $color-two;
+}
+
+.fd-demo svg:hover,
+.fd-demo img:hover {
+  color: $color-two;
+  background-color: $color-one;
+}
+
+.fd-layout-nav {
+  background-color: $color-two;
+}
+
+.fd-layout-main {
+  background-color: $color-tree;
+}
+
+//.fd-main-header,
+.fd-nav-header {
+  color: $color-tree;
+  background-color: $color-one;
+}
+
+.fd-main-footer,
+.fd-nav-footer {
+  background-color: $color-two;
+}
+/*.fd-nav-header:hover {
+  color: $color-one;
+  background-color: $color-default;
+}*/
+
+a:hover.nav-item,
+a.nav-item.is-active {
+  background-color: $color-tree;
+}
+
+
+/* Plyr Player
+-------------------------------------------------- */
+
+.plyr__controls {
+  border: none !important;
+  color: $color-one !important;
+}
+
+.plyr--audio .plyr__controls {
+  background-color: $color-two !important;
+}
+
+.plyr--audio .plyr__progress--buffer,
+.plyr--audio .plyr__volume--display {
+  background-color: $color-tree !important;;
+}
+
+.plyr--audio .plyr__progress--buffer,
+.plyr--audio .plyr__volume--display {
+  background-color: $color-tree !important;;
+}
+
+.plyr__progress--played,
+.plyr__volume--display {
+  color: $color-one !important;
+}
+
+.plyr__play-large {
+  background: $color-tree !important;
+  color: $color-one !important;
+  border: transparent !important;
+  padding: 25px !important;
+}
+
+
+.plyr__play-large:hover,
+.plyr__play-large:focus {
+  background-color: $color-one !important;
+  color: $color-tree !important;
+}
+
+.plyr--video .plyr__controls button.tab-focus:focus,
+.plyr--video .plyr__controls button:hover,
+.plyr--audio .plyr__controls button.tab-focus:focus,
+.plyr--audio .plyr__controls button:hover {
+  background-color: $color-one !important;
+  color: $color-tree !important;
+}
+
+.plyr--video .plyr__controls {
+  padding: 10px !important;
+  background: $color-default !important;
+}

@@ -1,0 +1,74 @@
+
+/* Config Batch
+-------------------------------------------------- */
+@import '../config/config';
+
+/*! Flickity
+-------------------------------------------------- */
+
+.carousel {
+  //padding-bottom: 90vh;
+  height: calc(100vh - 160px);
+  max-height: 500px;
+
+  //border: 2px solid transparent;
+
+  //background: transparent;
+
+
+  * {
+    transition: left 0.2s ease-in-out;
+  }
+}
+
+.carousel .flickity-viewport {
+  position: absolute;
+  width: 100%;
+}
+
+.carousel-cell-image {
+  display: block;
+  height: 100%;
+
+  max-width: inherit;
+
+
+  margin: 0;
+  //padding: 0 0 0 $door-size;
+  padding: $door-padding $door-size $door-padding 0;
+
+  filter: contrast(103%) brightness(97%) drop-shadow(1px 2px 2px rgba(0, 0, 0, .1));
+}
+
+.carousel.is-fullscreen {
+  background-color: $color-tree;
+}
+
+.carousel.is-fullscreen .carousel-cell-image {
+  height: 100%;
+}
+
+/* fade in lazy loaded image */
+.carousel-cell-image.flickity-lazyloaded,
+.carousel-cell-image.flickity-lazyerror {
+  opacity: 1;
+}
+
+
+
+
+.carousel-button {
+  float: right;
+  padding: ($door-size + ($door-size/4)) $door-size $door-size $door-size;
+
+  text-align: right;
+
+  button {
+
+    width: $door-size;
+    height: $door-size;
+
+    line-height: $door-size;
+    padding: 0;
+  }
+}

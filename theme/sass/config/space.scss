@@ -1,0 +1,428 @@
+/* Imports
+-------------------------------------------------- */
+@import 'config-door-size';
+@import 'config-mixins';
+
+
+/* Font Size
+-------------------------------------------------- */
+html {
+  font-size: $door-size - ($door-size / 6);
+  line-height: $door-size;
+}
+
+/* Headings
+-------------------------------------------------- */
+h1 {
+  font-size: $door-size + ($door-size / 4);
+}
+
+h2 {
+  font-size: $door-size + ($door-size / 4);
+}
+
+h3 {
+  font-size: $door-size + ($door-size / 4);
+}
+
+h1 {
+  line-height: $door-size + ($door-size / 2);
+}
+
+h2, h3 {
+  line-height: $door-size + ($door-size / 2);
+}
+
+h4, h5, h6 {
+  font-size: $door-size - ($door-size / 4);
+}
+
+h4, h5, h6 {
+  line-height: $door-size
+}
+
+/* ---------- Custom Le Portique ---------- */
+
+
+
+/* Code
+-------------------------------------------------- */
+code, kbd, samp, pre, tt, var {
+  font-size: $door-size - ($door-size / 3)
+}
+
+/* Global
+-------------------------------------------------- */
+p {
+  margin-bottom: $door-size;
+}
+
+blockquote {
+  //display: inline-block;
+  padding: $door-size;
+  margin-bottom: $door-size;
+}
+
+blockquote p {
+  margin-bottom: 0;
+}
+
+code, kbd, samp, pre, tt, var,
+mark, abbr {
+  padding: 2px ($door-padding/2);
+}
+
+hr {
+  height: $doorframe-size;
+  margin-top: -$doorframe-size;
+  margin-bottom: $door-size / 2;
+}
+
+
+ol, ul, dl {
+  margin-bottom: $door-size;
+}
+
+ol, ul, dl, dd {
+  margin-left: $door-size;
+}
+
+form ol,
+form ul,
+form li {
+  list-style: none;
+  margin: 0;
+}
+
+u,
+a {
+  text-decoration: underline;
+}
+
+ins {
+  border: none;
+  text-decoration: none !important;
+  border-bottom: $doorframe-size solid !important;
+}
+
+abbr {
+  border: none !important;
+  text-decoration: none !important;
+}
+
+svg,
+img {
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: bottom;
+  line-height: 0;
+}
+
+.fd-demo img {
+  padding: $door-size;
+}
+
+
+/* Buttons
+-------------------------------------------------- */
+button,
+.button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+  max-width: inherit;
+  padding: $door-padding;
+  border: none;
+
+  box-shadow: none;
+
+  appearance: none;
+
+  box-sizing: border-box;
+}
+
+.button-hard,
+.button-light {
+  @extend .button;
+}
+
+/* Forms
+-------------------------------------------------- */
+form {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: inline-block;
+}
+
+input,
+textarea,
+select {
+  vertical-align: top;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-height: $door-size + $door-padding*2;
+
+  padding: $door-padding - $doorframe-size;
+  border: $doorframe-size solid;
+
+  outline: 0;
+
+  box-shadow: none;
+  appearance: none;
+
+  box-sizing: border-box;
+}
+
+input[type="email"]:hover,
+input[type="number"]:hover,
+input[type="search"]:hover,
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="url"]:hover,
+input[type="password"]:hover,
+textarea:hover,
+select:hover {
+  cursor: pointer;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  cursor: inherit;
+}
+
+form label {
+  display: inline-block;
+
+  padding-top: $door-padding;
+  padding-bottom: $door-padding;
+}
+
+form label:hover {
+  cursor: pointer;
+}
+
+fieldset {
+  width: 100%;
+  position: relative;
+  padding: $door-padding;
+  margin-bottom: $door-size;
+  border-width: 0;
+  outline: $doorframe-size solid;
+  outline-offset: -$doorframe-size;
+}
+
+fieldset {
+  legend {
+    width: 100%;
+    display: inline-block;
+    float: left;
+  }
+}
+
+fieldset fieldset,
+fieldset fieldset fieldset {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Select
+-------------------------------------------------- */
+select {
+  padding-right: $door-padding*3;
+  text-overflow: ellipsis;
+  background: no-repeat local center right $door-padding;
+  background-size: $door-padding $door-size + ($door-padding*2);
+}
+
+/* FF HACK :( */
+@-moz-document url-prefix() {
+  select {
+    padding-bottom: 0 !important;
+  }
+}
+
+select[multiple] {
+  padding-right: $door-padding;
+}
+
+select[multiple] optgroup option {
+  padding-left: $door-padding;
+  padding-right: $door-padding;
+}
+
+
+/* Radio / Checkbox
+-------------------------------------------------- */
+input[type="radio"],
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+  position: relative;
+  padding-left: $door-padding*2 + $door-size;
+  padding-right: $door-padding;
+}
+
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label {
+}
+
+input[type="radio"] + label::before,
+input[type="checkbox"] + label::before {
+  content: "";
+  display: block;
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: $door-padding*2 + $door-size;
+  height: $door-padding*2 + $door-size;
+}
+
+input[type="radio"] + label::after,
+input[type="checkbox"] + label::after {
+  content: "";
+  display: block;
+  position: absolute;
+
+  text-align: center;
+
+  top: $door-padding;
+  left: $door-padding;
+
+  transform: scale(1);
+
+  width: $door-size;
+  height: $door-size;
+
+  border: $doorframe-size*2 solid;
+
+  background-clip: border-box !important;
+}
+
+input[type="radio"] + label::after {
+  @include border-radius($door-size);
+}
+
+input[type="checkbox"] + label::after {
+  @include border-radius($door-size);
+}
+
+input[type="radio"]:checked + label::after,
+input[type="checkbox"]:checked + label::after {
+  border: $door-size / 2 solid;
+}
+
+
+/* Input file
+-------------------------------------------------- */
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  @extend .button;
+}
+
+.inputfile + label * {
+  pointer-events: none;
+}
+
+/* Tables
+-------------------------------------------------- */
+table {
+  outline: $doorframe-size solid;
+  outline-offset: -$doorframe-size;
+  margin-bottom: $door-size;
+
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  overflow: auto;
+}
+
+th,
+td {
+  padding: $door-padding $door-padding $door-padding - ($doorframe-size) $door-padding;
+  border-bottom: $doorframe-size solid;
+  border-right: $doorframe-size solid;
+}
+
+/* Input Range
+-------------------------------------------------- */
+
+/* Range Track */
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: $doorframe-size*2;
+  border-radius: $doorframe-size*2;
+  cursor: pointer;
+  border: none;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: $doorframe-size*2;
+  border-radius: $doorframe-size*2;
+  cursor: pointer;
+  border: none;
+}
+
+/* Range Thumb */
+input[type=range]::-webkit-slider-thumb {
+  border: none;
+  width: $door-size;
+  height: $door-size;
+  margin-top: -($door-size / 2) + $doorframe-size;
+  border-radius: $door-size;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+  border: none;
+  width: $door-size;
+  height: $door-size;
+  margin-top: -($door-size / 2) + $doorframe-size;
+  border-radius: $door-size;
+
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+/* Grid
+-------------------------------------------------- */
+[class*='grid'] {
+
+  width: -webkit-calc(100% + #{$door-padding});
+  width: -moz-calc(100% + #{$door-padding});
+  width: calc(100% + #{$door-padding});
+
+  margin-left: -$door-padding / 2;
+}
+
+[class*='col-'] {
+  padding-left: $door-padding / 2;
+  padding-right: $door-padding / 2;
+}

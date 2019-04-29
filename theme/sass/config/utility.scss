@@ -1,0 +1,73 @@
+/* Imports
+-------------------------------------------------- */
+@import 'config-door-size';
+@import 'config-mixins';
+
+/* Responsive
+-------------------------------------------------- */
+$is-xs: "screen and (max-width: 35.5em)" !default; // up to 568px
+$is-sm: "screen and (max-width: 48em)" !default; // max 768px
+$is-md: "screen and (max-width: 64em)" !default; // max 1024px
+$is-lg: "screen and (max-width: 80em)" !default; // max 1280px
+
+
+/* Float
+-------------------------------------------------- */
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+
+/* Text Align
+-------------------------------------------------- */
+.text-left,
+.text-left-xs, .text-left-sm, .text-left-md, .text-left-lg {
+  text-align: left;
+}
+
+.text-center,
+.text-center-xs, .text-center-sm, .text-center-md, .text-center-lg {
+  text-align: center;
+}
+
+.text-right,
+.text-right-xs, .text-right-sm, .text-right-md, .text-right-lg {
+  text-align: right;
+}
+
+/* Text Align Responsive
+-------------------------------------------------- */
+.text-left-xs, .text-center-xs, .text-right-xs {
+  @media #{$is-xs}{ text-align: inherit }
+}
+
+.text-left-sm, .text-center-sm, .text-right-sm {
+  @media #{$is-sm}{ text-align: inherit }
+}
+
+.text-left-md, .text-center-md, .text-right-md {
+  @media #{$is-md}{ text-align: inherit }
+}
+
+.text-left-lg, .text-center-lg, .text-right-lg {
+  @media #{$is-lg}{ text-align: inherit }
+}
+
+/* <br> Responsive
+-------------------------------------------------- */
+.br-xs p br {
+  @media #{$is-xs}{ display: none }
+}
+.br-sm p br {
+  @media #{$is-sm}{ display: none }
+}
+.br-md p br {
+  @media #{$is-md}{ display: none }
+}
+.br-lg p br {
+  @media #{$is-lg}{ display: none }
+}

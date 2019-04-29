@@ -1,0 +1,49 @@
+
+/* UI Colors */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+$bloc-color-1: #fdfdfd;
+$bloc-color-2: #0079ff;
+$bloc-color-3: #b24576;
+$bloc-color-4: #333333;
+
+$color-shadow: rgba(0, 0, 0, 0.2);
+
+
+$color-default: white;
+.color-default { color: $color-default }
+
+$color-one: black;
+.color-one { color: $color-one }
+
+$color-two: blue;
+.color-two { color: $color-two }
+
+$color-tree: #FF0000;
+.color-tree { color: $color-tree }
+
+
+
+/* System Colors */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+$color-info: #6666FF;
+.color-info { color: $color-info }
+
+$color-warning: #fcc419;
+.color-warning { color: $color-warning }
+
+$color-error: #ff4758;
+.color-error { color: $color-error }
+
+$color-valid: #40c057;
+.color-valid { color: $color-valid }
+
+$color-required: #fff3bf;
+.color-required { color: $color-required }
+
+$color-mark: #b2f2bb;
+.color-mark { color: $color-mark }
+
+$color-abbr: #fff3bf;
+.color-abbr { color: $color-abbr }

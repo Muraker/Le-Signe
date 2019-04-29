@@ -1,0 +1,103 @@
+/* Imports
+-------------------------------------------------- */
+@import 'config-door-size';
+
+/* DEV COLOR */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+$color-dev-one: rgba(255, 0, 0, 0.15);
+$color-dev-two: rgba(0, 0, 255, 0.15);
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* Dev Tool & Baseline
+-------------------------------------------------- */
+
+
+* {
+  outline: 1px solid $color-dev-two;
+  outline-offset: -1px;
+  background-color: rgba(255, 255, 0, 0.1);
+  //opacity: 0.95;
+}
+
+body, html {
+  //background-color: transparent;
+}
+
+
+.fd-dev {
+  color: $color-dev-two;
+  background-color: $color-dev-one;
+  display: inline-block;
+  padding: 0 8px;
+  position: absolute;
+  border-radius: 0 0 0 2px;
+  top: 1px;
+  right: 1px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: bold;
+  text-transform: lowercase;
+}
+
+.fd-dev-baseline {
+  pointer-events: none;
+  display: inline-block;
+  position: fixed;
+
+  //z-index: 9999999;
+
+  //background-color: red;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-size: $door-size $door-size;
+  background-position: top left;
+  background-repeat: repeat;
+
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAK5JREFUeNrs0bENACAQA7E8Yv+Vg9iBgsJXZIB4kjT6pn2n7bjij5YLgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAgIEAEBIiBABASIgAAREAEBIiBA9LwjwAAfIwTHKvKmkwAAAABJRU5ErkJggg==');
+
+  //mix-blend-mode: screen;
+  opacity: 0.9;
+
+  //background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==);
+  //background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='#{baseline($door-size-fix)}'><path d='M 0 0 l 100 0' fill='none' id='baselinepath' stroke-width='1' stroke='rgba(255, 0, 0, 0.5)'/></svg>") repeat;
+}
+
+/* Layout
+-------------------------------------------------- */
+.fd-dev, span,
+strong, b, em, i, u, code, pre {
+  outline: none;
+}
+
+.fd-layout, .fd-layout-body,
+.fd-layout-nav, .fd-nav-header, .fd-nav-content, .fd-nav-footer,
+.fd-layout-main, .fd-main-header, .fd-main-content, .fd-main-footer {
+  outline: 2px solid $color-dev-one;
+  outline-offset: -1px;
+}
+
+/* Grid
+-------------------------------------------------- */
+[class*='grid'].fd-demo {
+  outline: 1px solid $color-dev-two;
+  outline-offset: -1px;
+}
+
+.fd-demo > [class*='col-'] {
+  outline: 1px solid $color-dev-one;
+  outline-offset: -1px;
+}
+
+
+/* Custom
+-------------------------------------------------- */
+.social-link {
+  background-color: rgba(0, 255, 0, 0.3);
+}

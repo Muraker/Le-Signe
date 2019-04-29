@@ -1,0 +1,181 @@
+
+/* Config Batch
+-------------------------------------------------- */
+@import '../config/config';
+
+/*! Photoswipe
+-------------------------------------------------- */
+
+/*
+.pswp__preloader {
+  display: none;
+  visibility: hidden;
+}
+*/
+
+.pswp {
+  z-index: 8;
+}
+
+
+.pswp__preloader {
+  width: $door-size;
+  height: $door-size;
+  position: absolute;
+  top: $door-size;
+  left: 50%;
+  margin-left: -$door-size/2;
+  //opacity: 1 !important;
+}
+
+.pswp__preloader__icn {
+  width: $door-size/2;
+  height: $door-size/2;
+  margin: 0;
+}
+
+.pswp--css_animation .pswp__preloader__icn {
+  opacity: 1;
+  width: $door-size/2;
+  height: $door-size/2;
+  position: absolute;
+  left: $door-size/4;
+  top: $door-size/4;
+}
+
+.pswp--css_animation .pswp__preloader__cut {
+  width: $door-size/4;
+  height: $door-size/4;
+}
+
+
+.pswp--css_animation .pswp__preloader__donut {
+  width: $door-size/2;
+  height: $door-size/2;
+  border: $doorframe-size solid $color-default;
+  border-radius: 50%;
+}
+
+
+
+.pswp__top-bar {
+  background-color: transparent;
+}
+
+.pswp__top-bar,
+.pswp__caption {
+  background-color: transparent;
+}
+
+.pswp__caption,
+.pswp__counter,
+.pswp__button--zoom,
+.pswp__button--share,
+.pswp__button--fs{
+  display: none;
+  visibility: hidden;
+}
+
+.pswp__bg {
+  background: $color-tree;
+}
+
+/*
+.pswp__container {
+  cursor: zoom-out !important;
+  cursor: -webkit-zoom-out !important;
+}
+*/
+
+.pswp__zoom-wrap {
+  padding: $door-size !important;
+}
+
+img.pswp__img {
+  //border: $door-size transparent solid;
+  //padding: $door-size;
+}
+
+
+
+
+.pswp__button--arrow--left:before,
+.pswp__button--arrow--right:before {
+  top: 0;
+  left: 0;
+  right: 0;
+  background: none;
+  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+
+  background: none !important;
+  background-color: transparent !important;
+
+  button {
+    background: none !important;
+    background-color: transparent !important;
+  }
+
+}
+
+.pswp__button--arrow--left {
+  left: $door-size + $door-border-size !important;
+}
+.pswp__button--arrow--right {
+  right: $door-size + $door-border-size !important;
+}
+
+.pswp button {
+  text-align: center;
+  color: $color-default;
+}
+
+.pswp__button,
+.pswp__button:active {
+  opacity: 1;
+
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+
+.pswp__button--close {
+
+  position: fixed;
+
+  bottom: $door-size + $door-border-size;
+  left: 50%;
+
+
+
+  width: $door-size !important;
+  height: $door-size !important;
+
+  background: none !important;
+  background-color: transparent !important;
+
+  padding: 0;
+  margin: 0;
+  margin-left: -$door-size/2;
+}
+
+.pswp__top-bar {
+  height: 0;
+}
+
+.pswp--animate_opacity,
+.pswp__bg,
+.pswp__caption,
+.pswp__top-bar,
+.pswp--has_mouse .pswp__button--arrow--left,
+.pswp--has_mouse .pswp__button--arrow--right{
+  //-webkit-transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+  //transition: opacity 333ms cubic-bezier(.4,0,.22,1);
+
+  -webkit-transition: opacity 0ms cubic-bezier(.4,0,.22,1);
+  transition: opacity 0ms cubic-bezier(.4,0,.22,1);
+}

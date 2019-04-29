@@ -1,0 +1,85 @@
+/* UI Timing */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+$high-speed: 100ms;
+$speed: 200ms;
+$slow: 400ms;
+$high-slow: 1000ms;
+
+
+
+/* PLUGIN Animation */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+/* Flickity
+-------------------------------------------------- */
+
+.flickity-viewport {
+  //transition: height $speed;
+}
+
+/* ---- previous/next buttons ---- */
+.flickity-prev-next-button {
+  transition: width $high-speed, opacity $high-speed;
+}
+
+/* Photoswipe
+-------------------------------------------------- */
+
+/* ---- previous/next buttons ---- */
+.pswp__button--arrow--left,
+.pswp__button--arrow--right,
+.pswp__button--close i {
+  transition: all $high-speed !important;
+}
+
+/* ---- Zoom / Fade ---- */
+.pswp__zoom-wrap {
+  transition: all $speed;
+}
+
+.pswp__bg {
+  transition: opacity $speed;
+}
+
+/* Magnific Popup
+-------------------------------------------------- */
+
+.panel-bottom {
+  transition: all $speed;
+}
+
+.mfp-preloader {
+  animation: preload-fun 1s;
+}
+
+@keyframes preload-fun {
+  0% { opacity: 0  }
+  50% { opacity: 0  }
+  100% { opacity: 1  }
+}
+
+/* Overlay (background) */
+.global-ajax-view.mfp-bg,
+.panel-quick-view.mfp-bg {
+  transition: all $speed;
+}
+
+/* Content */
+.global-ajax-view.mfp-wrap .mfp-content {
+  transition: all $speed;
+}
+
+/* Content */
+.panel-quick-view.mfp-wrap .mfp-content {
+  transition: all $speed;
+}
+
+/* Close button */
+.mfp-close {
+  transition: all $speed;
+}
+
+.mfp-close:before {
+  transition: all $high-speed;
+}

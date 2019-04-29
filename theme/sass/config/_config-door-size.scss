@@ -1,0 +1,19 @@
+
+/* DOOR SIZE */
+/* - - - - - - - - - - - - - - - - - - - - - - - - */
+
+//$door-size: 22px; // Baseline
+$door-size: 3.225vw; // Baseline
+$door-border-size: ($door-size / 4);
+$door-padding: ($door-size / 2);
+
+$door-size-medium: $door-size*2;
+$door-border-size-medium: ($door-size-medium / 4);
+$door-padding-medium: ($door-size-medium / 2);
+
+$door-size-small: $door-size*4;
+$door-border-size-small: ($door-size-small / 4);
+$door-padding-small: ($door-size-small / 2);
+
+
+$doorframe-size: 0.24vw; // Underline (hr, a, u)
