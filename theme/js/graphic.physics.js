@@ -59,8 +59,10 @@ HomePhysics.prototype.init = function(params) {
 
         for(var i = 0; i < self.bodies.length; i++) {
 
-            self.bodies[i].graphic.position = self.matterToPixiCoords(self.bodies[i].body.position);
-            self.bodies[i].graphic.rotation = self.bodies[i].body.angle;
+            if(self.bodies[i].body && self.bodies[i].graphic) {
+                self.bodies[i].graphic.position = self.matterToPixiCoords(self.bodies[i].body.position);
+                self.bodies[i].graphic.rotation = self.bodies[i].body.angle;
+            }
         }
 
         TWEEN.update();
@@ -203,13 +205,23 @@ HomePhysics.prototype.resize = function() {
     this.engine.world.bounds.max.y = this.boundingRect.height;
 
 
-    this.buildWalls();
+    var isScreenBigger =
+        this.boundingRect.width * this.boundingRect.height > oldBoundingRect.width * oldBoundingRect.height ?
+            true :
+            false;
 
+    if(isScreenBigger) {
+        this.buildWalls();
+    }
 
     for(var i = 0; i < this.bodies.length; i++) {
         var shape = this.bodies[i];
 
         this.resizeShape(shape);
+    }
+
+    if(!isScreenBigger) {
+        this.buildWalls();
     }
 }
 
@@ -428,18 +440,23 @@ HomePhysics.prototype.setPhysicBody = function(svg, shape) {
             render: renderOptions
         }, true);
 
-    v && this.Body.scale(v, scaleFactor, scaleFactor);
+    if(v) {
+        this.Body.scale(v, scaleFactor, scaleFactor);
 
-    vertexSets.push(v);
+        vertexSets.push(v);
 
-    this.World.add(this.engine.world, vertexSets);
+        this.World.add(this.engine.world, vertexSets);
 
-    shape.body = vertexSets[0];
+        shape.body = vertexSets[0];
 
-    shape.body.innerScale = scaleFactor;
+        shape.body.innerScale = scaleFactor;
 
-    if(options.angle) {
-        this.Body.setAngle(shape.body, options.angle);
+        if(options.angle) {
+            this.Body.setAngle(shape.body, options.angle);
+        }
+    }
+    else {
+        console.warn("Could not create a shape based on the SVG element, probably because it is not made of only 1 path tag.", options);
     }
 }
 
@@ -447,6 +464,7 @@ HomePhysics.prototype.setPhysicBody = function(svg, shape) {
 HomePhysics.prototype.setGraphics = function(shape) {
     var options = shape.originalOptions;
 
+    if(!shape.body) return;
 
     var colorSprite = new PIXI.Graphics();
 
