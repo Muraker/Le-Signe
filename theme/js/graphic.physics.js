@@ -513,7 +513,7 @@ HomePhysics.prototype.setGraphics = function(shape) {
         var fontSize = this.boundingRectRatio.width * shape.scale * 0.075;
 
         shape.graphic.text = new PIXI.Text(options.title.toUpperCase(), {
-            fontFamily : 'Arial',
+            fontFamily : 'bzaregular, Arial',
             fontSize: fontSize,
             fontWeight: 700,
             fill : titleColor,

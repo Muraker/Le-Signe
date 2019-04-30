@@ -26,27 +26,28 @@ $(document).ready(function () {
 
     // graphic poster physic
     var homePhysics = new HomePhysics({
-        //debugMode: true,
-        containerID: "poster-canvas",
+        //debugMode: true, // uncomment to show original physic objects
+        containerID: "poster-canvas", // container where we will append the canvas
     });
 
     var homePosterData = {
         name: "home",
         type: "svg",
-        svgUrl: "theme/img/poster-with-shadow.svg",
-        texture: "theme/img/affiche-biennale-ombre.jpg",
-        textureCover: true,
-        hasToFit: true,
+        svgUrl: "theme/img/poster-with-shadow.svg", // svg shape
+        texture: "theme/img/affiche-biennale-ombre.jpg", // texture
+        textureCover: true, // if the texture should cover the whole svg shape
 
         position: {
-            x: 50,
-            y: 50,
+            x: 50, // percent of the container
+            y: 50, // percent of the container
         },
         size: {
-            maxWidth: 66,
-            maxHeight: 85,
+            maxWidth: 66, // percent of the container
+            maxHeight: 85, // percent of the container
         },
-        angle: -25 // degrees
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: -25 // rotation in degrees
     };
 
     var poster = homePhysics.addShape(homePosterData);
