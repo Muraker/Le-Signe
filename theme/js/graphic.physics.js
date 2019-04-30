@@ -70,7 +70,7 @@ HomePhysics.prototype.init = function(params) {
 
 HomePhysics.prototype.clear = function() {
     for(var i = 0; i < this.bodies.length; i++) {
-        this.removeShape(bodies[i]);
+        this.removeShape(this.bodies[i]);
     }
 
     this.app.stage.removeChild(this.sceneContainer);
@@ -85,12 +85,8 @@ HomePhysics.prototype.initGraphics = function(params) {
         width: this.boundingRect.width/ this.pixelRatio,
         height: this.boundingRect.height/ this.pixelRatio,
         resolution: this.pixelRatio,
-        //backgroundColor: 0xffffff,
         transparent: true,
     });
-
-    //this.graphicContainer = new PIXI.Container();
-    //this.app.stage.addChild(this.graphicContainer);
 
     this.canvasContainer.appendChild(this.app.view);
 
@@ -181,9 +177,6 @@ HomePhysics.prototype.resize = function() {
 
     // graphics
     this.app.renderer.resize(this.boundingRect.width / this.pixelRatio, this.boundingRect.height / this.pixelRatio);
-
-    //this.app.view.width = this.boundingRect.width;
-    //this.app.view.height = this.boundingRect.height;
 
     this.sceneContainer.width = this.boundingRect.width / this.pixelRatio;
     this.sceneContainer.height = this.boundingRect.height / this.pixelRatio;
@@ -366,7 +359,7 @@ HomePhysics.prototype.removeShape = function(shape) {
     }
 
     if(shape.body) {
-        this.Composite.remove(this.world, shape.body);
+        this.Composite.remove(this.engine.world, shape.body);
     }
 
     shape = {};
@@ -464,6 +457,7 @@ HomePhysics.prototype.setGraphics = function(shape) {
 
     if(options.texture) {
         shape.graphic = new PIXI.Sprite.fromImage(options.texture);
+        shape.graphic.visible = false;
 
         // ugly but working
         var self = this;
@@ -508,9 +502,7 @@ HomePhysics.prototype.setGraphics = function(shape) {
             titleColor = "0x" + options.titleColor.substring(1)
         }
 
-        //var fontSize = 24 * (shape.body.innerScale / 3);
         var fontSize = this.boundingRectRatio.width * shape.scale * 0.075;
-        console.log("font size", fontSize);
 
         shape.graphic.text = new PIXI.Text(options.title.toUpperCase(), {
             fontFamily : 'Arial',
@@ -532,23 +524,11 @@ HomePhysics.prototype.setGraphics = function(shape) {
     if(options.href) {
         shape.graphic.cursor = 'pointer';
 
-        /*shape.graphic.on("click", function() {
-            console.log("clicked on shape, go to ", options.href);
-            setTimeout(function() {
-
-            });
-        });
-
-        shape.graphic.on("click", function() {
-            console.log("tap on shape, go to ", options.href);
-        });*/
-
         var pointerCoords = {
             x: 0,
             y: 0,
         };
         shape.graphic.on("mousedown", function(e) {
-            console.log("mouse down ", e);
             pointerCoords.x = e.data.originalEvent.clientX;
             pointerCoords.y = e.data.originalEvent.clientY;
         });
@@ -557,7 +537,7 @@ HomePhysics.prototype.setGraphics = function(shape) {
             var newPointerCoords = e.data.global;
 
             if(Math.abs(pointerCoords.x - newPointerCoords.x) < 20 && Math.abs(pointerCoords.y - newPointerCoords.y) < 20) {
-                console.log("should navigate to url", options.href);
+                console.log(">>> should navigate to url", options.href);
             }
         });
     }
@@ -595,14 +575,6 @@ HomePhysics.prototype.setMask = function(shape) {
     //var shapeFactor = this.pixelRatio;
     var shapeFactor = 1 / this.pixelRatio;
     if (options.textureCover) {
-        /*if (options.size.maxWidth) {
-            shapeFactor = shape.graphic.imgRatio;
-        }
-        else if (options.size.maxHeight) {
-            shapeFactor = 1 / shape.graphic.imgRatio;
-        }*/
-        //console.log(shapeFactor, shape.graphic.imgRatio);
-
         // set up a big number god knows why it's working
         shapeFactor = 100;
     }
@@ -622,6 +594,8 @@ HomePhysics.prototype.setMask = function(shape) {
 
     shape.graphic.mask = shape.mask;
     shape.graphic.addChild(shape.mask);
+
+    shape.graphic.visible = true;
 }
 
 HomePhysics.prototype.loadSVGShape = function(options) {
@@ -704,10 +678,10 @@ HomePhysics.prototype.buildWalls = function(options) {
 
 HomePhysics.prototype.removeWalls = function() {
     if(this.walls) {
-        this.Composite.remove(this.world, this.walls.ground);
-        this.Composite.remove(this.world, this.walls.leftWall);
-        this.Composite.remove(this.world, this.walls.rightWall);
-        this.Composite.remove(this.world, this.walls.ceiling);
+        this.Composite.remove(this.engine.world, this.walls.ground);
+        this.Composite.remove(this.engine.world, this.walls.leftWall);
+        this.Composite.remove(this.engine.world, this.walls.rightWall);
+        this.Composite.remove(this.engine.world, this.walls.ceiling);
 
         this.walls = {};
     }
