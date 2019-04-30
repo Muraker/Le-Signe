@@ -30,12 +30,6 @@ $(document).ready(function () {
         containerID: "poster-canvas",
     });
 
-    window.addEventListener("resize", function() {
-        homePhysics.resize();
-    }, false);
-
-
-
     var homePosterData = {
         name: "home",
         type: "svg",

@@ -65,10 +65,18 @@ HomePhysics.prototype.init = function(params) {
 
         TWEEN.update();
     });
+
+    // handle resize
+    this.resizeHandler = self.resize.bind(self);
+    window.addEventListener("resize", self.resizeHandler, true);
 };
 
 
 HomePhysics.prototype.clear = function() {
+    // remove resize handler
+    var self = this;
+    window.removeEventListener("resize", self.resizeHandler, true);
+
     for(var i = 0; i < this.bodies.length; i++) {
         this.removeShape(this.bodies[i]);
     }
