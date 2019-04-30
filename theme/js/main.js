@@ -22,6 +22,40 @@ $(document).ready(function () {
             $(document).on("scroll", onScroll);
         });
     });
+
+
+    // graphic poster physic
+    var homePhysics = new HomePhysics({
+        //debugMode: true,
+        containerID: "poster-canvas",
+    });
+
+    window.addEventListener("resize", function() {
+        homePhysics.resize();
+    }, false);
+
+
+
+    var homePosterData = {
+        name: "home",
+        type: "svg",
+        svgUrl: "theme/img/poster-with-shadow.svg",
+        texture: "theme/img/affiche-biennale-ombre.jpg",
+        textureCover: true,
+        hasToFit: true,
+
+        position: {
+            x: 50,
+            y: 50,
+        },
+        size: {
+            maxWidth: 66,
+            maxHeight: 85,
+        },
+        angle: -25 // degrees
+    };
+
+    var poster = homePhysics.addShape(homePosterData);
 });
 
 function onScroll(event){

@@ -52,7 +52,13 @@
     <div class="content affiche">
 
         <!-- MARTIN  HERE! -->
-        <img class="affiche-test" src="theme/img/affiche-biennale.jpg" />
+        <!--<img class="affiche-test" src="theme/img/affiche-biennale.jpg" />-->
+
+        <!-- TODO remove inline style -->
+        <div id="poster-canvas" style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
+
+        </div>
+
         <!-- A PLACE FOR ✌️-->
 
     </div>
@@ -2391,7 +2397,19 @@
 <div class="fd-dev-baseline"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="theme/js/main.min.js"></script>
+<!--<script src="theme/js/main.min.js"></script>-->
+
+
+<!-- TODO use main.min.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
+<script src="js/path-data-polyfill.js" type="text/javascript"></script>
+<script src="theme/js/assets/decomp.min.js" type="text/javascript"></script>
+<script src="theme/js/assets/pathseg.js" type="text/javascript"></script>
+<script src="theme/js/assets/matter.min.js" type="text/javascript"></script>
+<script src="theme/js/assets/pixi.min.js" type="text/javascript"></script>
+
+<script src="theme/js/graphic.physics.js"></script>
+<script src="theme/js/main.js"></script>
 
 </body>
 </html>
