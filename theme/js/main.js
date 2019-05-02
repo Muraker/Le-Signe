@@ -34,7 +34,7 @@ $(document).ready(function () {
         name: "home",
         type: "svg",
         svgUrl: "theme/img/poster-with-shadow.svg", // svg shape
-        texture: "theme/img/affiche-biennale-ombre.jpg", // texture
+        texture: "theme/img/affiche-biennale-shadow.jpg", // texture
         textureCover: true, // if the texture should cover the whole svg shape
 
         position: {
