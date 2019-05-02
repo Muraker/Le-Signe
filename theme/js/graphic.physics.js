@@ -50,8 +50,10 @@ HomePhysics.prototype.init = function(params) {
             }
         });
 
-    this.World.add(this.engine.world, mouseConstraint);
+    this.mouse.element.removeEventListener("mousewheel", this.mouse.mousewheel);
+    this.mouse.element.removeEventListener("DOMMouseScroll", this.mouse.mousewheel);
 
+    this.World.add(this.engine.world, mouseConstraint);
 
     var self = this;
     this.app.ticker.add((delta) => {
@@ -61,7 +63,7 @@ HomePhysics.prototype.init = function(params) {
 
             if(self.bodies[i].body && self.bodies[i].graphic) {
                 self.bodies[i].graphic.position = self.matterToPixiCoords(self.bodies[i].body.position);
-                self.bodies[i].graphic.rotation = self.bodies[i].body.angle;
+                self.bodies[i].graphic.rotation = self.bodies[i].body.angle/* - self.bodies[i].graphic.initialRotation*/;
             }
         }
 
@@ -84,7 +86,7 @@ HomePhysics.prototype.clear = function() {
     }
 
     this.app.stage.removeChild(this.sceneContainer);
-    this.app.destroy();
+    this.app.destroy(true);
 
     this.removeWalls();
 }
@@ -95,8 +97,12 @@ HomePhysics.prototype.initGraphics = function(params) {
         width: this.boundingRect.width/ this.pixelRatio,
         height: this.boundingRect.height/ this.pixelRatio,
         resolution: this.pixelRatio,
+        //backgroundColor: 0xffffff,
         transparent: true,
     });
+
+    //this.graphicContainer = new PIXI.Container();
+    //this.app.stage.addChild(this.graphicContainer);
 
     this.canvasContainer.appendChild(this.app.view);
 
@@ -253,27 +259,30 @@ HomePhysics.prototype.resizeShape = function(shape) {
 
     var options = shape.originalOptions;
 
-    // reset scale
-    this.Body.scale(shape.body, 1 / shape.previousScale, 1 / shape.previousScale);
-    // apply new scale
-    this.Body.scale(shape.body, shape.scale, shape.scale);
-
-
-    var actualPosition = shape.body.position;
-    this.Body.setPosition(shape.body, {x: actualPosition.x * this.worldScale.x, y: actualPosition.y * this.worldScale.y});
-
-    // resize textures
-    if(options.type == "svg") {
+    // physic object
+    if(shape.body) {
         // reset scale
-        shape.graphic.scale.x *= 1 / (shape.previousScale * this.pixelRatio);
-        shape.graphic.scale.y *= 1 / (shape.previousScale * this.pixelRatio);
+        this.Body.scale(shape.body, 1 / shape.previousScale, 1 / shape.previousScale);
         // apply new scale
-        shape.graphic.scale.x *= shape.scale * this.pixelRatio;
-        shape.graphic.scale.y *= shape.scale * this.pixelRatio;
+        this.Body.scale(shape.body, shape.scale, shape.scale);
+
+        var actualPosition = shape.body.position;
+        this.Body.setPosition(shape.body, {x: actualPosition.x * this.worldScale.x, y: actualPosition.y * this.worldScale.y});
+
+        shape.graphicRotation = shape.body.angle;
     }
 
-    // handle resize rotation bug
-    //shape.graphic.initialRotation = shape.body.angle;
+    // graphic object
+    if(shape.graphic) {
+        // recreate textures with the right size
+        var self = this;
+        this.setGraphics(shape, function(graphic) {
+            //console.log("graphic resize ready", graphic);
+            self.removeGraphics(shape);
+            shape.graphic = graphic;
+            self.sceneContainer.addChild(shape.graphic);
+        });
+    }
 }
 
 
@@ -369,13 +378,7 @@ HomePhysics.prototype.addShape = function(options) {
 HomePhysics.prototype.removeShape = function(shape) {
 
     if(shape.graphic) {
-
-        if(shape.graphic.mask) {
-            shape.graphic.removeChild(shape.graphic.mask);
-            shape.graphic.mask = null;
-        }
-
-        this.sceneContainer.removeChild(shape.graphic);
+        this.removeGraphics(shape);
     }
 
     if(shape.body) {
@@ -402,8 +405,6 @@ HomePhysics.prototype.setPhysicBody = function(svg, shape) {
     var vertexSets = [];
 
     var options = shape.originalOptions;
-
-    //shape.scale = 1;
 
     this.setScale(shape);
 
@@ -461,8 +462,10 @@ HomePhysics.prototype.setPhysicBody = function(svg, shape) {
 }
 
 
-HomePhysics.prototype.setGraphics = function(shape) {
+HomePhysics.prototype.setGraphics = function(shape, callback) {
     var options = shape.originalOptions;
+
+    var graphic = new PIXI.Container();
 
     if(!shape.body) return;
 
@@ -482,44 +485,56 @@ HomePhysics.prototype.setGraphics = function(shape) {
 
 
     if(options.texture) {
-        shape.graphic = new PIXI.Sprite.fromImage(options.texture);
-        shape.graphic.visible = false;
+        graphic.texture = new PIXI.Sprite.fromImage(options.texture);
+        graphic.texture.visible = false;
+
+        // this is needed to correct rotation issues on resize
+        if(!shape.graphicRotation) {
+            shape.graphicRotation = 0;
+        }
+
 
         // ugly but working
         var self = this;
-        var image = new Image();
-        image.onload = function() {
-            shape.graphic.imgRatio = image.width / image.height;
+        shape.textureImage = new Image();
+        shape.textureImage.onload = function() {
+            graphic.imgRatio = shape.textureImage.width / shape.textureImage.height;
 
             if(!options.textureCover) {
-                shape.graphic.width = image.width;
-                shape.graphic.height = image.height;
+                graphic.texture.width = shape.textureImage.width;
+                graphic.texture.height = shape.textureImage.height;
             }
             else {
-                shape.graphic.width = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100);
-                shape.graphic.height = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100) / shape.graphic.imgRatio;
+                graphic.texture.width = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100);
+                graphic.texture.height = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100) / graphic.imgRatio;
             }
 
-            self.setMask(shape);
+            self.setMask(shape, graphic, callback);
         }
-        image.src = options.texture;
+        shape.textureImage.src = options.texture;
 
 
-        shape.graphic.anchor.x = 0.5;
-        shape.graphic.anchor.y = 0.5;
+        graphic.texture.anchor.x = 0.5;
+        graphic.texture.anchor.y = 0.5;
 
-        shape.graphic.interactive = true;
+        graphic.texture.interactive = true;
         // useless ??
-        shape.graphic.on("added", function() {
+        graphic.texture.on("added", function() {
             //self.bodies.push(self.circle);
         });
 
-        shape.graphic.colorSprite = colorSprite;
-        shape.graphic.colorSprite.visible = false;
-        shape.graphic.addChild(shape.graphic.colorSprite);
+        graphic.addChild(graphic.texture);
+
+        graphic.colorSprite = colorSprite;
+        graphic.colorSprite.visible = false;
+
+        graphic.colorSprite.rotation = -shape.graphicRotation;
+
+        graphic.addChild(graphic.colorSprite);
     }
     else {
-        shape.graphic = colorSprite;
+        graphic.texture = colorSprite;
+        graphic.addChild(graphic.texture);
     }
 
     if(options.title) {
@@ -528,9 +543,12 @@ HomePhysics.prototype.setGraphics = function(shape) {
             titleColor = "0x" + options.titleColor.substring(1)
         }
 
-        var fontSize = this.boundingRectRatio.width * shape.scale * 0.075;
+        var relativeScale = shape.scale / (this.boundingRect.width / this.worldScale.initialScale.width);
 
-        shape.graphic.text = new PIXI.Text(options.title.toUpperCase(), {
+        var fontSize = this.boundingRectRatio.width * relativeScale * 0.075;
+        //console.log(this.boundingRectRatio.width, relativeScale, fontSize);
+
+        graphic.textStyle = new PIXI.TextStyle({
             fontFamily : 'bzaregular, Arial',
             fontSize: fontSize,
             fontWeight: 700,
@@ -538,28 +556,30 @@ HomePhysics.prototype.setGraphics = function(shape) {
             align : 'center',
         });
 
+        graphic.text = new PIXI.Text(options.title.toUpperCase(), graphic.textStyle);
+
         // center text
-        shape.graphic.text.position.x = -shape.graphic.text.width / 2;
-        shape.graphic.text.position.y = -shape.graphic.text.height / 2;
+        graphic.text.position.x = -graphic.text.width / 2;
+        graphic.text.position.y = -graphic.text.height / 2;
 
-        shape.graphic.text.visible = false;
+        graphic.text.visible = false;
 
-        shape.graphic.addChild(shape.graphic.text);
+        graphic.addChild(graphic.text);
     }
 
     if(options.href) {
-        shape.graphic.cursor = 'pointer';
+        graphic.texture.cursor = 'pointer';
 
         var pointerCoords = {
             x: 0,
             y: 0,
         };
-        shape.graphic.on("mousedown", function(e) {
+        graphic.texture.on("mousedown", function(e) {
             pointerCoords.x = e.data.originalEvent.clientX;
             pointerCoords.y = e.data.originalEvent.clientY;
         });
 
-        shape.graphic.on("mouseup", function(e) {
+        graphic.texture.on("mouseup", function(e) {
             var newPointerCoords = e.data.global;
 
             if(Math.abs(pointerCoords.x - newPointerCoords.x) < 20 && Math.abs(pointerCoords.y - newPointerCoords.y) < 20) {
@@ -569,29 +589,28 @@ HomePhysics.prototype.setGraphics = function(shape) {
     }
 
     // events
-    shape.graphic.on("mouseover", function() {
+    graphic.texture.on("mouseover", function() {
         //console.log("mouse enter");
-        if(shape.graphic.text) shape.graphic.text.visible = true;
-        if(shape.graphic.colorSprite && options.href) shape.graphic.colorSprite.visible = true;
+        if(graphic.text) graphic.text.visible = true;
+        if(graphic.colorSprite && options.href) graphic.colorSprite.visible = true;
     });
 
-    shape.graphic.on("mouseout", function() {
+    graphic.texture.on("mouseout", function() {
         //console.log("mouse leave");
-        if(shape.graphic.text) shape.graphic.text.visible = false;
-        if(shape.graphic.colorSprite && options.href) shape.graphic.colorSprite.visible = false;
+        if(graphic.text) graphic.text.visible = false;
+        if(graphic.colorSprite && options.href) graphic.colorSprite.visible = false;
     });
 
-    // this is nedded to correct rotation issues on resize
-    //shape.graphic.initialRotation = 0;
-
-    this.sceneContainer.addChild(shape.graphic);
+    if(!options.texture && callback) {
+        callback(graphic);
+    }
 }
 
-HomePhysics.prototype.setMask = function(shape) {
+HomePhysics.prototype.setMask = function(shape, graphic, callback) {
     var options = shape.originalOptions;
 
     // create mask
-    shape.mask = new PIXI.Graphics();
+    var mask = new PIXI.Graphics();
 
     var shapeBodyOffset = {
         x: shape.body.position.x,
@@ -601,6 +620,14 @@ HomePhysics.prototype.setMask = function(shape) {
     //var shapeFactor = this.pixelRatio;
     var shapeFactor = 1 / this.pixelRatio;
     if (options.textureCover) {
+        /*if (options.size.maxWidth) {
+            shapeFactor = shape.graphic.imgRatio;
+        }
+        else if (options.size.maxHeight) {
+            shapeFactor = 1 / shape.graphic.imgRatio;
+        }*/
+        //console.log(shapeFactor, shape.graphic.imgRatio);
+
         // set up a big number god knows why it's working
         shapeFactor = 100;
     }
@@ -608,21 +635,47 @@ HomePhysics.prototype.setMask = function(shape) {
     for (var k = shape.body.parts.length > 1 ? 1 : 0; k < shape.body.parts.length; k++) {
         part = shape.body.parts[k];
 
-        shape.mask.beginFill("0x00ff00"); // arbitrary color, doesn't matter
-        shape.mask.moveTo((part.vertices[0].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[0].y - shapeBodyOffset.y) * shapeFactor);
+        mask.beginFill("0x00ff00"); // arbitrary color, doesn't matter
+        mask.moveTo((part.vertices[0].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[0].y - shapeBodyOffset.y) * shapeFactor);
         for (var j = 1; j < part.vertices.length; j++) {
-            shape.mask.lineTo((part.vertices[j].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[j].y - shapeBodyOffset.y) * shapeFactor);
+            mask.lineTo((part.vertices[j].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[j].y - shapeBodyOffset.y) * shapeFactor);
         }
-        shape.mask.lineTo((part.vertices[0].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[0].y - shapeBodyOffset.y) * shapeFactor);
-        shape.mask.endFill();
+        mask.lineTo((part.vertices[0].x - shapeBodyOffset.x) * shapeFactor, (part.vertices[0].y - shapeBodyOffset.y) * shapeFactor);
+        mask.endFill();
     }
 
+    mask.rotation = -shape.graphicRotation;
 
-    shape.graphic.mask = shape.mask;
-    shape.graphic.addChild(shape.mask);
+    graphic.texture.mask = mask;
+    graphic.texture.addChild(mask);
 
-    shape.graphic.visible = true;
+    graphic.texture.visible = true;
+
+    if(callback) callback(graphic);
 }
+
+
+HomePhysics.prototype.removeGraphics = function(shape) {
+
+    if(shape.graphic.colorSprite) {
+        shape.graphic.removeChild(shape.graphic.colorSprite);
+    }
+    if(shape.graphic.text) {
+        shape.graphic.removeChild(shape.graphic.text);
+    }
+    if(shape.graphic.texture) {
+        shape.graphic.removeChild(shape.graphic.texture);
+
+        if(shape.graphic.texture.mask) {
+            shape.graphic.removeChild(shape.graphic.texture.mask);
+            shape.graphic.texture.mask = null;
+        }
+    }
+
+    this.sceneContainer.removeChild(shape.graphic);
+
+}
+
 
 HomePhysics.prototype.loadSVGShape = function(options) {
     var xhr = new XMLHttpRequest();
@@ -644,7 +697,11 @@ HomePhysics.prototype.loadSVGShape = function(options) {
             self.setPhysicBody(svg, shape);
 
             // now texture it
-            self.setGraphics(shape);
+            self.setGraphics(shape, function(graphic) {
+                //console.log("graphic ready", graphic);
+                shape.graphic = graphic;
+                self.sceneContainer.addChild(shape.graphic);
+            });
 
             self.bodies.push(shape);
 
