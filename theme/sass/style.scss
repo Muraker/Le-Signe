@@ -103,7 +103,10 @@ nav#biennale {
   top: 0;
   left: 0;
 
-  padding: $door-padding $door-padding/2;
+  text-transform: uppercase;
+
+  margin-top: -$door-size;
+  padding: ($door-padding + $door-size) $door-padding/2 $door-padding;
   background-color: $color-default;
 
   //border-bottom: $doorframe-size solid $color-one;
@@ -292,9 +295,6 @@ section {
   }
 }
 
-main {
-  min-height: 100vh;
-}
 
 
 .section-img {
@@ -409,6 +409,8 @@ main {
     top: 0;
     align-self: flex-start; /* <-- this is the fix */
 
+    z-index: 0;
+
     text-align: center;
 
     //background-color: rgba(255, 0, 121, 0.2);
@@ -416,16 +418,15 @@ main {
     height: auto;
     min-height: 100vh;
 
-    margin-top: $door-size*2;
+    //margin-top: $door-size*2;
     padding: $door-padding/2;
 
     .affiche-test {
-      box-shadow: 0 0 12px $color-shadow;
       max-height: calc(100vh - #{$door-padding});
     }
 
     #poster-canvas {
-      position: relative;
+      position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
@@ -436,18 +437,39 @@ main {
   .edito {
     overflow-y: auto;
     text-align: left;
-    padding: $door-padding*5 $door-padding 0 0;
+    padding: $door-padding*5 $door-padding 0;
+
+    min-height: 100vh;
+
+    z-index: 10;
 
     font-size: 80%;
+
+    box-shadow: 0 0 12px $color-shadow;
+    background-color: $color-default;
+    /////////////filter: drop-shadow(0px 0px 12px $color-shadow);
 
     //box-shadow: inset 6px 6px 6px $color-shadow;
 
     //box-shadow: inset 0px 0px 6px $color-shadow;
-    //ackground-color: cornsilk;
+    //background-color: cornsilk;
   }
 }
 
+main {
+  min-height: 100vh;
+  //background-color: $color-default;
+}
 
+#home {
+  z-index: 1;
+  //background-color: blue;
+  //overflow: hidden;
+}
+#programme {
+  z-index: 20;
+  //background-color: red;
+}
 
 
 
