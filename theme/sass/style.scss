@@ -150,6 +150,12 @@ section {
   //margin-bottom: $door-size;
 }
 
+#thanks {
+  section {
+    box-shadow: none;
+  }
+}
+
 .event {
   section {
     margin-top: $door-size + $door-padding;
