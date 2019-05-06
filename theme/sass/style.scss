@@ -472,6 +472,21 @@ main {
 }
 
 
+.columned {
+  column-count: 4;
+  column-rule: none;
+  column-gap: $door-padding;
+  column-fill: balance;
+
+  font-size: 50%;
+  line-height: 100%;
+
+  p {
+    margin-bottom: $door-padding;
+  }
+}
+
+
 
 // BIENNALE
 
