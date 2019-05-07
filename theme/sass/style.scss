@@ -681,6 +681,11 @@ iframe {
     .content {
       width: 100%;
     }
+    .affiche {
+      position: relative;
+      height: auto;
+      min-height: 100vh;
+    }
   }
 }
 
