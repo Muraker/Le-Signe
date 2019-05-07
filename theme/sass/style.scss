@@ -684,7 +684,11 @@ iframe {
     .affiche {
       position: relative;
       height: auto;
-      min-height: 100vh;
+      min-height: 65vh;
+    }
+    .edito {
+      min-height: 35vh;
+      padding: $door-size $door-padding;
     }
   }
 }
