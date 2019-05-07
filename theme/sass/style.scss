@@ -48,7 +48,8 @@ body {
   background-color: $color-tree;
 
   bottom: $door-padding;
-  right: $door-size*2;
+  //right: $door-size*2;
+  right: $door-padding;
 
   padding: $door-padding 0 0;
 
@@ -228,7 +229,8 @@ section {
   z-index: 2;
 }
 
-#programme .event {
+#programme .event,
+#visites .event {
   width: 33.333333333%;
 
   padding: $door-padding/2;
@@ -472,7 +474,8 @@ main {
   //background-color: blue;
   //overflow: hidden;
 }
-#programme {
+#programme,
+#visites {
   z-index: 20;
   //background-color: red;
 }
@@ -675,7 +678,11 @@ iframe {
 }
 
 
-@media all and (max-width: 800px) {
-
+@media all and (max-width: 1024px) {
+  #home {
+    .content {
+      width: 100%;
+    }
+  }
 }
 
