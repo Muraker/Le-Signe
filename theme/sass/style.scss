@@ -465,8 +465,12 @@ section {
 }
 
 main {
-  min-height: 100vh;
+  //min-height: 100vh;
   //background-color: $color-default;
+}
+
+main#home {
+  min-height: 100vh;
 }
 
 #home {
