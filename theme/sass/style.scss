@@ -687,6 +687,7 @@ iframe {
     }
     .affiche {
       position: relative;
+      position: sticky;
       height: auto;
       min-height: 65vh;
     }
