@@ -55,11 +55,11 @@ $(document).ready(function () {
 
 function onScroll(event){
     var scrollPos = $(document).scrollTop();
-    $('#biennale a').each(function () {
+    $('#biennale a.link').each(function () {
         var currLink = $(this);
         var refElement = $(currLink.attr("href"));
         if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-            $('#biennale ul li a').removeClass("active");
+            $('#biennale ul li a.link').removeClass("active");
             currLink.addClass("active");
         }
         else{
