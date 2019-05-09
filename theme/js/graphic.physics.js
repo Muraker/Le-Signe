@@ -251,7 +251,6 @@ HomePhysics.prototype.setScale = function(shape) {
 
     // readjust based on initial width
     shape.scale *= this.boundingRect.width / this.worldScale.initialScale.width;
-    //console.log(shape.scale);
 }
 
 
@@ -740,13 +739,7 @@ HomePhysics.prototype.buildWalls = function(options) {
     else {
         this.walls = {};
 
-        var renderOptions = {
-            fillStyle: "#00ff00",
-            strokeStyle: "transparent",
-            visible: this.debugMode ? true : false,
-        }
-
-        this.walls.ground = this.Bodies.rectangle(this.boundingRect.width / 2, this.boundingRect.height + WALL_THICKNESS / 2, this.boundingRect.width, WALL_THICKNESS, { isStatic: true, render: renderOptions});
+        this.walls.ground = this.Bodies.rectangle(this.boundingRect.width / 2, this.boundingRect.height + WALL_THICKNESS / 2, this.boundingRect.width, WALL_THICKNESS, { isStatic: true, render: {visible: false}});
 
         this.walls.leftWall = this.Bodies.rectangle(-WALL_THICKNESS / 2, this.boundingRect.height / 2, WALL_THICKNESS, this.boundingRect.height, { isStatic: true, render: {visible: false} });
 
