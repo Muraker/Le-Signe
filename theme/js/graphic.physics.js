@@ -44,6 +44,7 @@ HomePhysics.prototype.init = function(params) {
             mouse: this.mouse,
             constraint: {
                 stiffness: 0.1,
+                angularStiffness: 0,
                 render: {
                     visible: false
                 }
