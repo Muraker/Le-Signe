@@ -67,7 +67,7 @@ HomePhysics.prototype.init = function(params) {
             }
         }
 
-        TWEEN.update();
+        //TWEEN.update();
     });
 
     // handle resize
@@ -213,8 +213,8 @@ HomePhysics.prototype.resize = function() {
 
     var isScreenBigger =
         this.boundingRect.width * this.boundingRect.height > oldBoundingRect.width * oldBoundingRect.height ?
-            true :
-            false;
+        true :
+        false;
 
     if(isScreenBigger) {
         this.buildWalls();
@@ -251,6 +251,7 @@ HomePhysics.prototype.setScale = function(shape) {
 
     // readjust based on initial width
     shape.scale *= this.boundingRect.width / this.worldScale.initialScale.width;
+    //console.log(shape.scale);
 }
 
 
@@ -306,7 +307,8 @@ HomePhysics.prototype.addShape = function(options) {
 
     if(!options) {
         options = {
-            type: "rectangle",
+            name: Math.floor(Math.random() * 10000).toString(),
+            type: "svg",
 
             fillStyle: "#ff0000",
             originalFillStyle: "#ff0000",
@@ -322,46 +324,35 @@ HomePhysics.prototype.addShape = function(options) {
         };
     }
     else {
-        if(!options.type) {
-            options.type= "rectangle";
+        if(options.name == "undefined" || !options.name) {
+            options.name = Math.floor(Math.random() * 10000).toString();
         }
 
-        if(!options.position) {
+        if(options.type == "undefined" || !options.type) {
+            options.type= "svg";
+        }
+
+        if(options.position == "undefined" || !options.position) {
             options.position = {
                 x: 0,
                 y: 0,
             };
         }
 
-        if(!options.size) {
+        if(options.size == "undefined" || !options.size) {
             options.position = {
                 maxWidth: this.percentToPixel(this.boundingRectRatio.width, 12.5),
                 maxHeight: this.percentToPixel(this.boundingRect.width, 12.5),
             };
         }
 
-        if(!options.fillStyle) {
+        if(options.fillStyle == "undefined" || !options.fillStyle) {
             options.fillStyle = "#ff0000";
         }
 
-        if(!options.strokeStyle) {
+        if(options.strokeStyle == "undefined" || !options.strokeStyle) {
             options.strokeStyle = "transparent";
         }
-    }
-
-
-    var renderOptions = {
-        fillStyle: options.fillStyle,
-        originalFillStyle: options.fillStyle,
-        strokeStyle: options.strokeStyle,
-    };
-
-    if(options.texture) {
-        renderOptions.sprite = {
-            texture: options.texture,
-            xScale: 1,
-            yScale: 1,
-        };
     }
 
     if(options.type == "svg" && options.svgUrl) {
@@ -429,10 +420,11 @@ HomePhysics.prototype.setPhysicBody = function(svg, shape) {
 
     // used only for debug
     var renderOptions = {
-        fillStyle: "#00ff00",
-        originalFillStyle: "transparent",
-        strokeStyle: "transparent",
+        fillStyle: options.fillStyle || "#00ff00",
+        strokeStyle: options.fillStyle || "transparent",
     };
+
+    if(this.debugMode) renderOptions.fillStyle = "#00ff00";
 
     var v = this.Bodies.fromVertices(
         this.percentToPixel(this.boundingRect.width, options.position.x),
@@ -485,7 +477,11 @@ HomePhysics.prototype.setGraphics = function(shape, callback) {
 
 
     if(options.texture) {
-        graphic.texture = new PIXI.Sprite.fromImage(options.texture);
+        var texture = new PIXI.Texture.from(options.texture);
+        // add texture to global cache
+        PIXI.Texture.addToCache(texture, options.name);
+        graphic.texture = new PIXI.Sprite(texture);
+
         graphic.texture.visible = false;
 
         // this is needed to correct rotation issues on resize
@@ -493,35 +489,35 @@ HomePhysics.prototype.setGraphics = function(shape, callback) {
             shape.graphicRotation = 0;
         }
 
+        var textureLoader = new PIXI.loaders.Loader();
+        textureLoader.add(options.name, options.texture);
 
-        // ugly but working
         var self = this;
-        shape.textureImage = new Image();
-        shape.textureImage.onload = function() {
-            graphic.imgRatio = shape.textureImage.width / shape.textureImage.height;
+        textureLoader.load(function(loader, resources) {
+            var width = resources[options.name].texture.baseTexture.width;
+            var height = resources[options.name].texture.baseTexture.height;
+
+            graphic.imgRatio = width / height;
 
             if(!options.textureCover) {
-                graphic.texture.width = shape.textureImage.width;
-                graphic.texture.height = shape.textureImage.height;
+                graphic.texture.width = width;
+                graphic.texture.height = height;
             }
             else {
-                graphic.texture.width = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100);
-                graphic.texture.height = self.percentToPixel(self.boundingRectRatio.width, shape.scale * 100) / graphic.imgRatio;
+                var coverScale = shape.scale / (self.boundingRect.width / self.worldScale.initialScale.width);
+
+                graphic.texture.width = self.percentToPixel(self.boundingRectRatio.width, coverScale * 100);
+                graphic.texture.height = self.percentToPixel(self.boundingRectRatio.width, coverScale * 100) / graphic.imgRatio;
             }
 
             self.setMask(shape, graphic, callback);
-        }
-        shape.textureImage.src = options.texture;
+        });
 
 
         graphic.texture.anchor.x = 0.5;
         graphic.texture.anchor.y = 0.5;
 
         graphic.texture.interactive = true;
-        // useless ??
-        graphic.texture.on("added", function() {
-            //self.bodies.push(self.circle);
-        });
 
         graphic.addChild(graphic.texture);
 
@@ -744,7 +740,13 @@ HomePhysics.prototype.buildWalls = function(options) {
     else {
         this.walls = {};
 
-        this.walls.ground = this.Bodies.rectangle(this.boundingRect.width / 2, this.boundingRect.height + WALL_THICKNESS / 2, this.boundingRect.width, WALL_THICKNESS, { isStatic: true, render: {visible: false} });
+        var renderOptions = {
+            fillStyle: "#00ff00",
+            strokeStyle: "transparent",
+            visible: this.debugMode ? true : false,
+        }
+
+        this.walls.ground = this.Bodies.rectangle(this.boundingRect.width / 2, this.boundingRect.height + WALL_THICKNESS / 2, this.boundingRect.width, WALL_THICKNESS, { isStatic: true, render: renderOptions});
 
         this.walls.leftWall = this.Bodies.rectangle(-WALL_THICKNESS / 2, this.boundingRect.height / 2, WALL_THICKNESS, this.boundingRect.height, { isStatic: true, render: {visible: false} });
 
