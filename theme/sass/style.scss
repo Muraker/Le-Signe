@@ -705,7 +705,7 @@ main.biennale {
 
       max-height: 120vh;
       padding-bottom: 30vh;
-      margin-bottom: -30vh;
+      margin-bottom: calc(-30vh - #{$door-padding});
 
       border: $door-padding solid transparent;
 
