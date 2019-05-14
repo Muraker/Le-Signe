@@ -644,7 +644,7 @@ main.biennale {
   border: 0;
   width: 50%;
   height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   z-index: 1;
 
   transition: width .2s linear;
@@ -660,6 +660,8 @@ main.biennale {
 
 
 .affiches {
+
+  min-height: 100vh;
 
   display: flex;
   flex-direction: row;
