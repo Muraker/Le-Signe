@@ -707,9 +707,9 @@ main.biennale {
       padding-bottom: 30vh;
       margin-bottom: -30vh;
 
-      border: 10px solid transparent;
+      border: $door-padding solid transparent;
 
-      filter: drop-shadow(0px 5px 10px $color-shadow);
+      filter: drop-shadow(0px 0 $door-padding/2 $color-shadow);
 
     }
   }
@@ -719,6 +719,10 @@ main.biennale {
 .vote {
   position: fixed;
   right: 0;
+
+  iframe {
+    filter: drop-shadow(0px 0 $door-padding/2 $color-shadow);
+  }
 
   //filter: drop-shadow(0px 0px 10px $color-shadow);
 
