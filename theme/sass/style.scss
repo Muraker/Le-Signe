@@ -28,7 +28,10 @@ body {
 
   border-radius: $door-size*2;
 
-  line-height: $door-size*2;
+  padding: 2.15vw 0 0;
+
+  font-size: 70%;
+  line-height: 100%;
   text-align: center;
 
   z-index: 9998;
