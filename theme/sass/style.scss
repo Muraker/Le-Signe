@@ -28,9 +28,9 @@ body {
 
   border-radius: $door-size*2;
 
-  padding: 2.15vw 0 0;
+  padding: $door-padding+0.1vw 0 0;
 
-  font-size: 70%;
+  font-size: 50%;
   line-height: 100%;
   text-align: center;
 
