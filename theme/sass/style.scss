@@ -626,9 +626,16 @@ main.biennale {
   h1 {
     text-transform: initial !important;
     line-height: 100%;
+    position: relative;
   }
   .triple0 {
     letter-spacing: -1.4vw;
+  }
+  .signature-sb {
+    width: 12vw;
+    position: absolute;
+    top: -3vw;
+    left: 7.2vw;
   }
 }
 
