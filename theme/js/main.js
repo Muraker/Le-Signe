@@ -39,7 +39,7 @@ $(document).ready(function () {
 
         position: {
             x: 50, // percent of the container
-            y: 50, // percent of the container
+            y: 0, // percent of the container
         },
         size: {
             maxWidth: 60, // percent of the container
