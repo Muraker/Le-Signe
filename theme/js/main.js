@@ -178,6 +178,7 @@ $(document).ready(function () {
     var pastille5 = homePhysics.addShape(homePastille05Data);
 });
 
+
 function onScroll(event){
     var scrollPos = $(document).scrollTop();
     $('#biennale a.link').each(function () {
