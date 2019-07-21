@@ -103,18 +103,23 @@ small {
 nav#biennale {
 
   width: 100%;
-  position: fixed;
+  //position: fixed;
+  //top: 0;
+  //left: 0;
+
+  position: sticky;
   top: 0;
-  left: 0;
 
   text-transform: uppercase;
 
-  margin-top: -$door-size;
-  padding: ($door-padding + $door-size) $door-padding/2 $door-padding;
+  //margin-top: -$door-size;
+  //padding: ($door-padding + $door-size) $door-padding/2 $door-padding;
+  padding: $door-padding $door-padding/2 $door-padding;
   background-color: $color-default;
 
   //border-bottom: $doorframe-size solid $color-one;
-  filter: drop-shadow(0px 6px 3px $color-shadow);
+  //filter: drop-shadow(0px 0px 3px $color-shadow);
+  box-shadow: 0 0 12px $color-shadow;
 
   z-index: 999;
   transition: top 0.3s ease-out;
@@ -399,7 +404,7 @@ section {
 
 
 
-
+#home-ete,
 #home {
 
   display: flex;
@@ -436,6 +441,7 @@ section {
       max-height: calc(100vh - #{$door-padding});
     }
 
+    #poster-ete,
     #poster-canvas {
       position: absolute;
       top: 0;
@@ -456,7 +462,7 @@ section {
   .edito {
     overflow-y: auto;
     text-align: left;
-    padding: $door-padding*5 $door-padding 0;
+    padding: (($door-size*2) + $door-padding) $door-padding 0;
 
     min-height: 100vh;
 
@@ -472,6 +478,24 @@ section {
 
     //box-shadow: inset 0px 0px 6px $color-shadow;
     //background-color: cornsilk;
+  }
+}
+
+#home-ete {
+
+  .edito {
+    overflow-y: hidden;
+    padding: 0;
+
+    hr {
+      background-color: transparent;
+    }
+
+    img {
+      pointer-events: none;
+      width: 100%;
+      box-shadow: 0 6px 6px $color-shadow;
+    }
   }
 }
 
@@ -745,6 +769,7 @@ main.biennale {
 
 
 @media all and (max-width: 1024px) {
+  #home-ete,
   #home {
     .content {
       width: 100%;
@@ -760,6 +785,17 @@ main.biennale {
       padding: $door-size $door-padding;
     }
   }
+
+  #home-ete {
+    .affiche {
+      min-height: 80vh;
+    }
+    .edito {
+      min-height: 20vh;
+      padding: 0;
+    }
+  }
+
 
   // VOTE
 

@@ -176,6 +176,138 @@ $(document).ready(function () {
         angle: 0 // rotation in degrees
     };
     var pastille5 = homePhysics.addShape(homePastille05Data);
+
+    // graphic poster physic ete
+    var homePhysicsEte = new HomePhysics({
+        //debugMode: true, // uncomment to show original physic objects
+        containerID: "poster-ete", // container where we will append the canvas
+    });
+
+    var homePosterData = {
+        name: "poster",
+        type: "svg",
+        svgUrl: "theme/img/affiche-site-shadow.svg", // svg shape
+        texture: "theme/img/affiche-site-shadow.png", // texture
+        textureCover: true, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 45, // percent of the container
+            y: 10, // percent of the container
+        },
+        size: {
+            maxWidth: 60, // percent of the container
+            maxHeight: 75, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 25 // rotation in degrees
+    };
+    var poster = homePhysicsEte.addShape(homePosterData);
+
+    var homePastille01Data = {
+        name: "pastille1",
+        type: "svg",
+        svgUrl: "theme/img/pastille.svg", // svg shape
+        texture: "theme/img/pastille.png", // texture
+        textureCover: false, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 50, // percent of the container
+            y: 50, // percent of the container
+        },
+        size: {
+            maxWidth: 4, // percent of the container
+            maxHeight: 4, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 0 // rotation in degrees
+    };
+    var pastille1 = homePhysicsEte.addShape(homePastille01Data);
+
+    var homePastille02Data = {
+        name: "pastille2",
+        type: "svg",
+        svgUrl: "theme/img/pastille.svg", // svg shape
+        texture: "theme/img/pastille.png", // texture
+        textureCover: false, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 20, // percent of the container
+            y: 20, // percent of the container
+        },
+        size: {
+            maxWidth: 4, // percent of the container
+            maxHeight: 4, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 0 // rotation in degrees
+    };
+    var pastille2 = homePhysicsEte.addShape(homePastille02Data);
+
+    var homePastille03Data = {
+        name: "pastille3",
+        type: "svg",
+        svgUrl: "theme/img/pastille.svg", // svg shape
+        texture: "theme/img/pastille.png", // texture
+        textureCover: false, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 30, // percent of the container
+            y: 80, // percent of the container
+        },
+        size: {
+            maxWidth: 4, // percent of the container
+            maxHeight: 4, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 0 // rotation in degrees
+    };
+    var pastille3 = homePhysicsEte.addShape(homePastille03Data);
+
+    var homePastille04Data = {
+        name: "pastille4",
+        type: "svg",
+        svgUrl: "theme/img/pastille.svg", // svg shape
+        texture: "theme/img/pastille.png", // texture
+        textureCover: false, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 45, // percent of the container
+            y: 90, // percent of the container
+        },
+        size: {
+            maxWidth: 4, // percent of the container
+            maxHeight: 4, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 0 // rotation in degrees
+    };
+    var pastille4 = homePhysicsEte.addShape(homePastille04Data);
+
+    var homePastille05Data = {
+        name: "pastille5",
+        type: "svg",
+        svgUrl: "theme/img/pastille.svg", // svg shape
+        texture: "theme/img/pastille.png", // texture
+        textureCover: false, // if the texture should cover the whole svg shape
+
+        position: {
+            x: 70, // percent of the container
+            y: 10, // percent of the container
+        },
+        size: {
+            maxWidth: 4, // percent of the container
+            maxHeight: 4, // percent of the container
+        },
+        hasToFit: true, // if true the object will use the min possible size defined by maxWidth and maxHeight, if false it will use the max possible size
+
+        angle: 0 // rotation in degrees
+    };
+    var pastille5 = homePhysicsEte.addShape(homePastille05Data);
 });
 
 
@@ -197,6 +329,7 @@ function onScroll(event){
 
 
 // MENU Up 'N' Close
+/*
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
@@ -207,3 +340,4 @@ window.onscroll = function() {
     }
     prevScrollpos = currentScrollPos;
 };
+*/
