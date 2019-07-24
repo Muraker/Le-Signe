@@ -14,7 +14,8 @@ body {
 }
 
 .pastille,
-.pastille-2{
+.pastille-2,
+.pastille-3 {
   width: $door-size*2;
   height: $door-size*2;
 
@@ -23,10 +24,8 @@ body {
 
   position: fixed;
 
-  bottom: $door-padding;
-  right: $door-padding;
-
   border-radius: $door-size*2;
+  overflow: hidden;
 
   padding: $door-padding+0.1vw 0 0;
 
@@ -36,13 +35,18 @@ body {
 
   z-index: 9998;
 
-  animation: fading 1s infinite alternate ease-out;
+  animation: fading .5s infinite alternate ease-out;
   animation-play-state: paused;
 
   &:hover {
     z-index: 9999;
     animation-play-state: running;
   }
+}
+
+.pastille {
+  bottom: $door-padding;
+  right: $door-padding;
 }
 
 .pastille-2 {
@@ -65,15 +69,47 @@ body {
   animation-play-state: paused;
 }
 
+@keyframes rotating {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.pastille-3 {
+
+  width: $door-size*2;
+  height: $door-size*2;
+
+  color: white;
+  background-color: black;
+
+  text-transform: uppercase;
+
+  padding: 0;
+
+  bottom: $door-padding;
+  left: 50%;
+  margin-left: -$door-size;
+
+  animation: rotating-3 3s infinite linear;
+  animation-play-state: running;
+  animation-direction: reverse;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes rotating-3 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes fading {
   from { opacity: 1; }
   to { opacity: 0.2; }
 }
 
-@keyframes rotating {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+
 
 html,
 body {
@@ -188,7 +224,7 @@ header.year,
 header.date,
 header.event-top {
   position: sticky;
-  top: 0;
+  top: $door-size*2;
 
   text-transform: uppercase;
   padding: $door-padding/2;
@@ -213,8 +249,6 @@ header.event-top {
 
   z-index: 2;
   text-align: right;
-
-  top: 0;
 
   //background-color: $color-default;
   //background-color: #b2f2bb;
@@ -497,6 +531,8 @@ section {
       box-shadow: 0 6px 6px $color-shadow;
     }
   }
+
+  box-shadow: 0 6px 12px $color-shadow;
 }
 
 main {
