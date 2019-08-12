@@ -844,3 +844,17 @@ main.biennale {
   }
 }
 
+.bar {
+  display: block;
+  padding: $door-padding/2;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  //background-color: #fcc419;
+  //z-index: 9999;
+
+  color : red;
+  //font-size: 50%;
+  //line-height: $door-size/2;
+  text-align: center;
+}
