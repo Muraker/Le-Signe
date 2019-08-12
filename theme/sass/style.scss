@@ -469,7 +469,7 @@ section {
     min-height: 100vh;
 
     //margin-top: $door-size*2;
-    padding: $door-padding/2;
+    //padding: $door-padding/2;
 
     .affiche-test {
       max-height: calc(100vh - #{$door-padding});
@@ -846,7 +846,7 @@ main.biennale {
 
 .bar {
   display: block;
-  padding: $door-padding/2;
+  padding: $door-padding;
   width: 100%;
   position: sticky;
   top: 0;
